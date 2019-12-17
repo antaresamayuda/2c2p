@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using _2C2P.Database;
 using _2C2P.Models;
+using System.Globalization;
 
 namespace _2C2P.Controllers.APIController
 {
@@ -17,118 +18,169 @@ namespace _2C2P.Controllers.APIController
     {
         private Entities db = new Entities();
 
-        // GET: api/Transactions
-        public IQueryable<Transaction> GetTransactions()
-        {
-            return db.Transactions;
-        }
-
-        // GET: api/Transactions/5
+        // GET: api/Transactions?currency=USD
         [ResponseType(typeof(Transaction))]
-        public IHttpActionResult GetTransaction(string id)
+        public List<TransactionViewModel> GetTransactionByCurrency(string currency)
         {
-            Transaction transaction = db.Transactions.Find(id);
-            if (transaction == null)
-            {
-                return NotFound();
-            }
+            List<TransactionViewModel> ListData = (from data in db.Transactions
+                                                   where data.CurrencyCode == currency
 
-            return Ok(transaction);
+                                                   select new TransactionViewModel
+                                                   {
+                                                       id = data.TransactionID,
+                                                       payment = data.Amount + " " + data.CurrencyCode,
+                                                       Status = data.Status
+                                                   }).ToList();
+
+            return ListData;
         }
 
-        // PUT: api/Transactions/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutTransaction(string id, Transaction transaction)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != transaction.TransactionID)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(transaction).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TransactionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Transactions
+        // GET: api/Transactions?daterange=ddMMyyyy-ddMMyyyy
         [ResponseType(typeof(Transaction))]
-        public IHttpActionResult PostTransaction(Transaction transaction)
+        public List<TransactionViewModel> GetTransactionByDate(string daterange)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            DateTime StartDate = DateTime.ParseExact(daterange.Split('-').ToList<string>()[0], "ddMMyyyy", CultureInfo.InvariantCulture);
+            DateTime EndDate = DateTime.ParseExact(daterange.Split('-').ToList<string>()[1], "ddMMyyyy", CultureInfo.InvariantCulture);
 
-            db.Transactions.Add(transaction);
+            List<TransactionViewModel> ListData = (from data in db.Transactions
+                                                   where StartDate <= data.TransactionDate && data.TransactionDate <= EndDate
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (TransactionExists(transaction.TransactionID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = transaction.TransactionID }, transaction);
+                                                   select new TransactionViewModel
+                                                   {
+                                                       id = data.TransactionID,
+                                                       payment = data.Amount + " " + data.CurrencyCode,
+                                                       Status = data.Status
+                                                   }).ToList();
+            return ListData;
         }
 
-        // DELETE: api/Transactions/5
-        [ResponseType(typeof(Transaction))]
-        public IHttpActionResult DeleteTransaction(string id)
+        // GET: api/Transactions?status=A
+        public List<TransactionViewModel> GetTransactionByStatus(string status)
         {
-            Transaction transaction = db.Transactions.Find(id);
-            if (transaction == null)
-            {
-                return NotFound();
-            }
+            List<TransactionViewModel> ListData = (from data in db.Transactions
+                                                   where data.Status == status
 
-            db.Transactions.Remove(transaction);
-            db.SaveChanges();
-
-            return Ok(transaction);
+                                                   select new TransactionViewModel
+                                                   {
+                                                       id = data.TransactionID,
+                                                       payment = data.Amount + " " + data.CurrencyCode,
+                                                       Status = data.Status
+                                                   }).ToList();
+            return ListData;
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //// GET: api/Transactions
+        //public IQueryable<Transaction> GetTransactions()
+        //{
+        //    return db.Transactions;
+        //}
 
-        private bool TransactionExists(string id)
-        {
-            return db.Transactions.Count(e => e.TransactionID == id) > 0;
-        }
+        //// GET: api/Transactions/5
+        //[ResponseType(typeof(Transaction))]
+        //public IHttpActionResult GetTransaction(string id)
+        //{
+        //    Transaction transaction = db.Transactions.Find(id);
+        //    if (transaction == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(transaction);
+        //}
+
+        //// PUT: api/Transactions/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutTransaction(string id, Transaction transaction)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    if (id != transaction.TransactionID)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    db.Entry(transaction).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!TransactionExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
+
+        //// POST: api/Transactions
+        //[ResponseType(typeof(Transaction))]
+        //public IHttpActionResult PostTransaction(Transaction transaction)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+
+        //    db.Transactions.Add(transaction);
+
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateException)
+        //    {
+        //        if (TransactionExists(transaction.TransactionID))
+        //        {
+        //            return Conflict();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return CreatedAtRoute("DefaultApi", new { id = transaction.TransactionID }, transaction);
+        //}
+
+        //// DELETE: api/Transactions/5
+        //[ResponseType(typeof(Transaction))]
+        //public IHttpActionResult DeleteTransaction(string id)
+        //{
+        //    Transaction transaction = db.Transactions.Find(id);
+        //    if (transaction == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    db.Transactions.Remove(transaction);
+        //    db.SaveChanges();
+
+        //    return Ok(transaction);
+        //}
+
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
+
+        //private bool TransactionExists(string id)
+        //{
+        //    return db.Transactions.Count(e => e.TransactionID == id) > 0;
+        //}
     }
 }
