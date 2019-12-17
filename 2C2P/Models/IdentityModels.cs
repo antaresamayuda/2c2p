@@ -29,5 +29,7 @@ namespace _2C2P.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<_2C2P.Database.Transaction> Transactions { get; set; }
     }
 }
