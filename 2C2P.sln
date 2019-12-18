@@ -8,6 +8,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6046066B-4E9A-4028-AA51-C1AEA8097FC5}"
 	ProjectSection(SolutionItems) = preProject
 		DB.sql = DB.sql
+		sampleCSV.csv = sampleCSV.csv
+		sampleXML.xml = sampleXML.xml
 	EndProjectSection
 EndProject
 Global
