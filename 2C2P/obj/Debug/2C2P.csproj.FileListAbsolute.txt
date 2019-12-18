@@ -16,6 +16,7 @@ D:\2c2p\2C2P\bin\2C2P.pdb
 D:\2c2p\2C2P\bin\Antlr3.Runtime.dll
 D:\2c2p\2C2P\bin\EntityFramework.dll
 D:\2c2p\2C2P\bin\EntityFramework.SqlServer.dll
+D:\2c2p\2C2P\bin\LumenWorks.Framework.IO.dll
 D:\2c2p\2C2P\bin\Microsoft.AspNet.Identity.Core.dll
 D:\2c2p\2C2P\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 D:\2c2p\2C2P\bin\Microsoft.AspNet.Identity.Owin.dll
@@ -33,6 +34,7 @@ D:\2c2p\2C2P\bin\Microsoft.Web.Infrastructure.dll
 D:\2c2p\2C2P\bin\Newtonsoft.Json.dll
 D:\2c2p\2C2P\bin\Owin.dll
 D:\2c2p\2C2P\bin\System.Net.Http.Formatting.dll
+D:\2c2p\2C2P\bin\System.ValueTuple.dll
 D:\2c2p\2C2P\bin\System.Web.Helpers.dll
 D:\2c2p\2C2P\bin\System.Web.Http.dll
 D:\2c2p\2C2P\bin\System.Web.Http.Owin.dll
@@ -44,7 +46,10 @@ D:\2c2p\2C2P\bin\System.Web.WebPages.Deployment.dll
 D:\2c2p\2C2P\bin\System.Web.WebPages.dll
 D:\2c2p\2C2P\bin\System.Web.WebPages.Razor.dll
 D:\2c2p\2C2P\bin\WebGrease.dll
+D:\2c2p\2C2P\bin\LumenWorks.Framework.IO.pdb
+D:\2c2p\2C2P\bin\LumenWorks.Framework.IO.xml
 D:\2c2p\2C2P\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\2c2p\2C2P\bin\System.ValueTuple.xml
 D:\2c2p\2C2P\bin\Newtonsoft.Json.xml
 D:\2c2p\2C2P\bin\System.Net.Http.Formatting.xml
 D:\2c2p\2C2P\bin\System.Web.Helpers.xml
@@ -72,9 +77,7 @@ D:\2c2p\2C2P\bin\Microsoft.Owin.Security.Google.xml
 D:\2c2p\2C2P\bin\Microsoft.Owin.Security.Twitter.xml
 D:\2c2p\2C2P\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\2c2p\2C2P\bin\System.Web.Http.Owin.xml
-D:\2c2p\2C2P\obj\Debug\2C2P.csprojResolveAssemblyReference.cache
+D:\2c2p\2C2P\obj\Debug\2C2P.csproj.CopyComplete
 D:\2c2p\2C2P\obj\Debug\2C2P.dll
 D:\2c2p\2C2P\obj\Debug\2C2P.pdb
-D:\2c2p\2C2P\bin\LumenWorks.Framework.IO.dll
-D:\2c2p\2C2P\bin\LumenWorks.Framework.IO.pdb
-D:\2c2p\2C2P\bin\LumenWorks.Framework.IO.xml
+D:\2c2p\2C2P\obj\Debug\2C2P.csprojAssemblyReference.cache

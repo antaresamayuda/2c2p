@@ -19,6 +19,7 @@ namespace _2C2P.Database
         public string CurrencyCode { get; set; }
         public System.DateTime TransactionDate { get; set; }
         public string Status { get; set; }
+        public string StatusDisplay { get; set; }
         public Nullable<System.DateTime> UploadDate { get; set; }
     }
 }

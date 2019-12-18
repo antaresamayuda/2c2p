@@ -25,7 +25,6 @@ namespace _2C2P.Database
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
     }
 }

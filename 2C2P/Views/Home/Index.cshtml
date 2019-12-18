@@ -1,5 +1,4 @@
-﻿@model System.Data.DataTable
-@using System.Data;
+﻿@model List<_2C2P.Database.Transaction>
 
 <style>
     .custom-validation-summary ul {
@@ -7,15 +6,15 @@
         color: red;
         padding: 0;
     }
-</style> 
+</style>
 
 <div class="jumbotron">
-    <h1>2C2P - Antaresa Mayuda</h1>
-    <p class="lead">Software Architect Technical Assignment</p>
-</div>
+        <h1>2C2P - Antaresa Mayuda</h1>
+        <p class="lead">Software Architect Technical Assignment</p>
+    </div>
 <div class="row">
     <div class="col-md-12">
-        <h2>Upload File CSV/XML</h2>
+        <h2>Upload File CSV / XML</h2>
 
         @using (Html.BeginForm("Upload", "Home", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
@@ -27,11 +26,11 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="submit" value="Upload" class="btn btn-success" />
-                    <input type="submit" value="Clear" class="btn btn-warning" />
+                    <button type="submit" name="btn" value="Upload" class="btn btn-success">Upload</button>
+                    <button type="submit" name="btn" value="Refresh" class="btn btn-warning">Refresh</button>
                 </div>
             </div>
-                  
+
             <div class="text-danger">
                 @Html.ValidationSummary()
             </div>
@@ -49,18 +48,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (DataRow row in Model.Rows)
+                        @foreach (var item in Model)
                         {
-                            <tr>
-                                @foreach (DataColumn col in Model.Columns)
-                                {
-                                    <td>@row[col.ColumnName]</td>
-                                }
-                            </tr>
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.TransactionID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Amount)</td>
+                            <td>@Html.DisplayFor(modelItem => item.CurrencyCode)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TransactionDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.StatusDisplay)</td>
+                        </tr>
                         }
                     </tbody>
                 </table>
             }
-        } 
+        }
     </div>
 </div>

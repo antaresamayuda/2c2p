@@ -1,15 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="C2P_AntaresaModelStoreContainer" CdmEntityContainer="Entities">
-    <EntitySetMapping Name="ErrorLogs">
-      <EntityTypeMapping TypeName="C2P_AntaresaModel.ErrorLog">
-        <MappingFragment StoreEntitySet="ErrorLog">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ErrorLog1" ColumnName="ErrorLog" />
-          <ScalarProperty Name="ErrorDate" ColumnName="ErrorDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Transactions">
       <EntityTypeMapping TypeName="C2P_AntaresaModel.Transaction">
         <MappingFragment StoreEntitySet="Transaction">
