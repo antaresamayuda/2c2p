@@ -77,7 +77,6 @@ D:\2c2p\2C2P\bin\Microsoft.Owin.Security.Google.xml
 D:\2c2p\2C2P\bin\Microsoft.Owin.Security.Twitter.xml
 D:\2c2p\2C2P\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\2c2p\2C2P\bin\System.Web.Http.Owin.xml
-D:\2c2p\2C2P\obj\Debug\2C2P.csproj.CopyComplete
 D:\2c2p\2C2P\obj\Debug\2C2P.dll
 D:\2c2p\2C2P\obj\Debug\2C2P.pdb
-D:\2c2p\2C2P\obj\Debug\2C2P.csprojAssemblyReference.cache
+D:\2c2p\2C2P\obj\Debug\2C2P.csprojResolveAssemblyReference.cache

@@ -53,7 +53,7 @@ namespace _2C2P.Controllers
                             csvTable.Load(csvReader);
                         }
 
-                        return View("Index", GenerateDataCSV(csvTable));
+                        return View("Index", GenerateSaveDataCSV(csvTable));
                     }
                     else if (upload.FileName.EndsWith(".xml"))
                     {
@@ -63,9 +63,8 @@ namespace _2C2P.Controllers
                         xmlDoc.LoadXml(xmlRaw.ToString());
 
                         string data = JsonConvert.SerializeXmlNode(xmlDoc);
-                        JObject jsonDat = JObject.Parse(data);
 
-                        return View("Index", GenerateDataXML(jsonDat));
+                        return View("Index", GenerateSaveDataXML(data));
                     }
                     else
                     {
@@ -86,7 +85,7 @@ namespace _2C2P.Controllers
             }                   
         }
 
-        public List<Transaction> GenerateDataCSV(DataTable csvTable)
+        public List<Transaction> GenerateSaveDataCSV(DataTable csvTable)
         {
             List<Transaction> lisdata = new List<Transaction>();
 
@@ -122,15 +121,48 @@ namespace _2C2P.Controllers
             db.Transactions.AddRange(lisdata);
             db.SaveChanges();
 
-            return(lisdata);
+            return (lisdata);
         }
 
-        public List<Transaction> GenerateDataXML(JObject jsonDat)
+        public List<Transaction> GenerateSaveDataXML(string jsonDat)
         {
             List<Transaction> lisdata = new List<Transaction>();
 
+            JObject a = JObject.Parse(jsonDat);
+            JToken b = JToken.Parse((a["Transactions"]).ToString());
+            JToken c = JToken.Parse((b["Transaction"]).ToString());
 
+            foreach (JObject d in c)
+            {
+                Transaction data = new Transaction();
 
+                data.TransactionID = (d["@id"]).ToString();
+                data.TransactionDate = Convert.ToDateTime((d["TransactionDate"]).ToString());
+                data.StatusDisplay = (d["Status"]).ToString();
+
+                JObject e = JObject.Parse((d["PaymentDetails"]).ToString());
+
+                data.Amount = Convert.ToDecimal((e["Amount"]).ToString());
+                data.CurrencyCode = (e["CurrencyCode"]).ToString();
+
+                if (data.StatusDisplay == "Approved")
+                {
+                    data.Status = "A";
+                }
+                else if (data.StatusDisplay == "Rejected")
+                {
+                    data.Status = "R";
+                }
+                else
+                {
+                    data.Status = "D";
+                }
+
+                lisdata.Add(data);
+            };
+
+            db.Transactions.AddRange(lisdata);
+            db.SaveChanges();
 
             return lisdata;
         }
